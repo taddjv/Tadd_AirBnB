@@ -5,12 +5,13 @@ const cors = require("cors");
 const csurf = require("csurf");
 const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
+
+const routes = require("./routes");
+
 const { ValidationError } = require("sequelize");
 
 const { environment } = require("./config");
 const isProduction = environment === "production";
-
-const routes = require("./routes");
 
 const app = express();
 
@@ -44,6 +45,7 @@ app.use(
     },
   })
 );
+
 app.use(routes); // Connect all the routes
 
 app.use((_req, _res, next) => {
@@ -59,6 +61,9 @@ app.use((err, _req, _res, next) => {
   if (err instanceof ValidationError) {
     err.errors = err.errors.map((e) => e.message);
     err.title = "Validation error";
+    //!
+    err.status = 403;
+    //!
   }
   next(err);
 });
