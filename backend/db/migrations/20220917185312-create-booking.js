@@ -1,25 +1,35 @@
 "use strict";
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Images", {
+    await queryInterface.createTable("Bookings", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      url: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
-      imageableId: {
+      spotId: {
         type: Sequelize.INTEGER,
-      },
-      imageableType: {
-        type: Sequelize.ENUM("Review", "Spot"),
+        allowNull: false,
+        references: {
+          model: "Spots",
+          key: "id",
+        },
+        onDelete: "cascade",
       },
       userId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Users",
+          key: "id",
+        },
+      },
+      startDate: {
+        type: Sequelize.DATE,
+      },
+      endDate: {
+        type: Sequelize.DATE,
       },
       createdAt: {
         allowNull: false,
@@ -34,6 +44,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Images");
+    await queryInterface.dropTable("Bookings");
   },
 };

@@ -28,12 +28,21 @@ const setTokenCookie = (res, user) => {
 
 const restoreUser = (req, res, next) => {
   // token parsed from cookies
+
   const { token } = req.cookies;
   req.user = null;
 
+  if (!token) {
+    res.json({
+      message: "Authentication required",
+      statusCode: 401,
+    });
+  }
+
   return jwt.verify(token, secret, null, async (err, jwtPayload) => {
     if (err) {
-      return next();
+      err.status = 403;
+      return next(err);
     }
 
     try {
