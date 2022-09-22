@@ -15,7 +15,7 @@ router.get("/current", restoreUser, async (req, res) => {
   const { id } = req.user;
   const reviews = await Review.findAll({
     where: {
-      ownerId: id,
+      userId: id,
     },
   });
 
