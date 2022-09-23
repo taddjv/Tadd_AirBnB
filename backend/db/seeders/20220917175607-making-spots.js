@@ -76,9 +76,7 @@ const spots = [
     description:
       "MetLife Stadium is a multi-purpose stadium at the Meadowlands Sports Complex in East Rutherford, New Jersey, 5 mi west of New York City. ",
     price: "106",
-    //!
-    owner: 14,
-    //!
+    owner: 4,
     avgRating: 3.9,
     previewImage:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Metlife_stadium_%28Aerial_view%29.jpg/250px-Metlife_stadium_%28Aerial_view%29.jpg",
@@ -94,9 +92,7 @@ const spots = [
     description:
       "Bell Centre, formerly known as Molson Centre, is a multi-purpose arena located in Montreal, Quebec, Canada.",
     price: 999,
-    //!
-    owner: 14,
-    //!
+    owner: 5,
     avgRating: 4.0,
     previewImage:
       "https://upload.wikimedia.org/wikipedia/commons/8/80/CentreBell.jpg",

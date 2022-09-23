@@ -94,15 +94,6 @@ const users = [
     username: "PoisonIvy",
     password: "greenLife",
   },
-  //!
-  {
-    firstName: "John",
-    lastName: "Smith",
-    email: "john.smith@gmail.com",
-    username: "johnnysmith",
-    password: "secret password",
-  },
-  //!
 ];
 
 module.exports = {

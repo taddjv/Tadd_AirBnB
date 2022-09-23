@@ -167,6 +167,9 @@ router.get("/:spotId", async (req, res, next) => {
     where: {
       id: req.params.spotId,
     },
+    attributes: {
+      exclude: ["avgRating", "previewImage"],
+    },
     include: [
       {
         model: Image,
