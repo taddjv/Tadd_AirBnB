@@ -124,6 +124,29 @@ router.post(
     res.json(newReview);
   }
 );
+//! Get all Reviews owned by the spot's id
+router.get("/:spotId/reviews", async (req, res, next) => {
+  const reviews = await Review.findAll({
+    where: {
+      spotId: req.params.spotId,
+    },
+    include: [
+      {
+        model: User,
+      },
+      {
+        model: Image,
+      },
+    ],
+  });
+  if (!reviews.length) {
+    const err = new Error("Spot couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.json(reviews);
+});
 
 //! Get all Spots owned by the Current User
 //? i did /currentUser/spots
@@ -236,7 +259,7 @@ router.put("/:spotId", restoreUser, validateSpot, async (req, res, next) => {
     err.status = 403;
     return next(err);
   }
-  theSpot.set({
+  theSpot.update({
     address,
     city,
     state,
