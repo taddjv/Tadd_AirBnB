@@ -235,6 +235,11 @@ router.post("/:spotId/images", restoreUser, async (req, res, next) => {
   });
 
   const newImage = await Image.findByPk(theImage.id);
+  if (req.body.previewImage) {
+    theSpot.update({
+      previewImage: req.body.url,
+    });
+  }
   res.json(newImage);
 });
 

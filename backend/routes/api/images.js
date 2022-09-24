@@ -26,6 +26,9 @@ router.delete("/:imageId", restoreUser, async (req, res, next) => {
     where: {
       id: req.params.imageId,
     },
+    attributes: {
+      include: ["userId"],
+    },
   });
 
   if (!theImage) {
