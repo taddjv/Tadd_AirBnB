@@ -69,5 +69,17 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    for (let i = 0; i < bookings.length; i++) {
+      const { spotId, userId, startDate, endDate } = bookings[i];
+
+      await Booking.destroy({
+        where: {
+          spotId,
+          userId,
+          startDate,
+          endDate,
+        },
+      });
+    }
   },
 };

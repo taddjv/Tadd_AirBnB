@@ -128,5 +128,18 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    for (let i = 0; i < users.length; i++) {
+      const { firstName, lastName, username, email, password } = users[i];
+      const hashedPassword = bcrypt.hashSync(password);
+      await User.destroy({
+        where: {
+          firstName,
+          lastName,
+          username,
+          email,
+          hashedPassword,
+        },
+      });
+    }
   },
 };

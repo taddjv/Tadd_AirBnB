@@ -110,7 +110,6 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    //? find owner method ?
     for (let i = 0; i < spots.length; i++) {
       const {
         address,
@@ -126,9 +125,6 @@ module.exports = {
         avgRating,
         previewImage,
       } = spots[i];
-      // const foundOwner =  await User.findOne({
-      //   where: {id: owner }
-      // })
       await Spot.create({
         address,
         city,
@@ -153,5 +149,37 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    for (let i = 0; i < spots.length; i++) {
+      const {
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price,
+        owner,
+        avgRating,
+        previewImage,
+      } = spots[i];
+      await Spot.destroy({
+        where: {
+          address,
+          city,
+          state,
+          country,
+          lat,
+          lng,
+          name,
+          description,
+          price,
+          ownerId: owner,
+          avgRating,
+          previewImage,
+        },
+      });
+    }
   },
 };

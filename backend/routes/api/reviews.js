@@ -36,9 +36,6 @@ router.post("/:reviewId/images", restoreUser, async (req, res, next) => {
     },
     include: {
       model: Image,
-      attributes: [
-        [sequelize.fn("COUNT", sequelize.col("Images.id")), "imageCount"],
-      ],
     },
   });
 
