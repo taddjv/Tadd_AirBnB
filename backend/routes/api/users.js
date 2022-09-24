@@ -38,8 +38,41 @@ router.get("/", async (req, res) => {
 });
 
 // Sign up
-router.post("/", validateSignup, async (req, res) => {
+router.post("/", validateSignup, async (req, res, next) => {
   const { firstName, lastName, email, password, username } = req.body;
+
+  const emailUser = await User.findOne({
+    where: {
+      email,
+    },
+  });
+  if (emailUser) {
+    const err = new Error("User with that email already exists");
+    err.username = "User with that email already exists";
+    res.status(403);
+    err.message = "User already exists";
+    res.json({
+      message: err.message,
+      statusCode: 403,
+      errors: err,
+    });
+  }
+  const usernameUser = await User.findOne({
+    where: {
+      email,
+    },
+  });
+  if (usernameUser) {
+    const err = new Error("User with that username already exists");
+    err.username = "User with that username already exists";
+    res.status(403);
+    err.message = "User already exists";
+    res.json({
+      message: err.message,
+      statusCode: 403,
+      errors: err,
+    });
+  }
 
   const user = await User.signup({
     firstName,
