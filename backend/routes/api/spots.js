@@ -52,6 +52,34 @@ const validateReview = [
   handleValidationErrors,
 ];
 
+const validateBooking = [
+  check("endDate", "startDate")
+    .custom((a, b) => {
+      console.log(a, b);
+    })
+    .withMessage("Stars must be an integer from 1 to 5"),
+  handleValidationErrors,
+];
+
+//! create a booking based on spot id
+router.post(
+  "/spotId/bookings",
+  restoreUser,
+  validateBooking,
+  async (req, res, next) => {
+    const theSpot = await Spot.findOne({
+      where: {
+        id: req.params.spotId,
+      },
+    });
+    if (!theSpot) {
+      const err = new Error("Spot couldn't be found");
+      err.status = 404;
+      return next(err);
+    }
+  }
+);
+
 //! Add an Image to a Spot based on the Spot's id
 router.post("/:spotId/images", restoreUser, async (req, res, next) => {
   const theSpot = await Spot.findOne({
