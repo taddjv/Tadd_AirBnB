@@ -17,6 +17,26 @@ const handleValidationErrors = (req, _res, next) => {
   next();
 };
 
+const dateChecker = (
+  start_date_booked,
+  end_date_booked,
+  start_date_desired,
+  end_date_desired
+) => {
+  if (start_date_desired >= start_date_booked) {
+    if (start_date_desired <= end_date_booked) {
+      return false;
+    }
+  }
+  if (end_date_desired <= end_date_booked) {
+    if (end_date_desired >= start_date_booked) {
+      return false;
+    }
+  }
+  return true;
+};
+
 module.exports = {
   handleValidationErrors,
+  dateChecker,
 };

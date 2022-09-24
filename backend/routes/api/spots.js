@@ -6,9 +6,19 @@ const {
   requireAuth,
   restoreUser,
 } = require("../../utils/auth");
-const { Spot, Image, Review, User, sequelize } = require("../../db/models");
+const {
+  Booking,
+  Spot,
+  Image,
+  Review,
+  User,
+  sequelize,
+} = require("../../db/models");
 const { check } = require("express-validator");
-const { handleValidationErrors } = require("../../utils/validation");
+const {
+  handleValidationErrors,
+  dateChecker,
+} = require("../../utils/validation");
 
 const validateSpot = [
   check("address")
@@ -55,18 +65,74 @@ const validateReview = [
 const validateBooking = [
   check("endDate", "startDate")
     .custom((a, b) => {
-      console.log(a, b);
+      const { startDate, endDate } = b.req.body;
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      if (start >= end) {
+        return false;
+      } else {
+        return true;
+      }
     })
-    .withMessage("Stars must be an integer from 1 to 5"),
+    .withMessage("endDate cannot be on or before startDate"),
   handleValidationErrors,
 ];
+//! get all bookings for a spot from spot id
+router.get("/:spotId/bookings", restoreUser, async (req, res, next) => {
+  const theSpot = await Spot.findOne({
+    where: {
+      id: req.params.spotId,
+    },
+  });
+  if (!theSpot) {
+    const err = new Error("Spot couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
+  if (req.user.id === theSpot.ownerId) {
+    const bookings = await Booking.findAll({
+      where: {
+        spotId: req.params.spotId,
+      },
+      include: {
+        model: User,
+        attributes: {
+          exclude: [
+            "username",
+            "email",
+            "hashedPassword",
+            "createdAt",
+            "updatedAt",
+          ],
+        },
+      },
+    });
+    res.json(bookings);
+  } else {
+    const bookings = await Booking.findAll({
+      where: {
+        spotId: req.params.spotId,
+      },
+      attributes: {
+        exclude: ["id", "userId", "createdAt", "updatedAt"],
+      },
+    });
+    res.json(bookings);
+  }
+});
 
 //! create a booking based on spot id
 router.post(
-  "/spotId/bookings",
+  "/:spotId/bookings",
   restoreUser,
   validateBooking,
   async (req, res, next) => {
+    const desiredStart = new Date(req.body.startDate);
+    const desiredEnd = new Date(req.body.endDate);
+
+    const { id } = req.user;
+    const { spotId } = req.params;
+
     const theSpot = await Spot.findOne({
       where: {
         id: req.params.spotId,
@@ -77,6 +143,35 @@ router.post(
       err.status = 404;
       return next(err);
     }
+    const bookings = await Booking.findAll({
+      where: {
+        spotId: req.params.spotId,
+      },
+    });
+    for (let i = 0; i < bookings.length; i++) {
+      const booked = bookings[i];
+      if (
+        !dateChecker(
+          booked.startDate,
+          booked.startDate,
+          desiredStart,
+          desiredEnd
+        )
+      ) {
+        const err = new Error(
+          "Sorry, this spot is already booked for the specified dates"
+        );
+        err.status = 403;
+        return next(err);
+      }
+    }
+    const newBooking = await Booking.create({
+      spotId,
+      userId: id,
+      startDate: desiredStart,
+      endDate: desiredEnd,
+    });
+    res.json(newBooking);
   }
 );
 
