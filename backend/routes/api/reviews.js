@@ -38,6 +38,11 @@ router.post("/:reviewId/images", restoreUser, async (req, res, next) => {
       model: Image,
     },
   });
+  if (!theReview.dataValues.id) {
+    const err = new Error("Review couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
 
   if (theReview.Images.length) {
     let numOfImages = theReview.Images[0].dataValues.imageCount;
@@ -50,11 +55,6 @@ router.post("/:reviewId/images", restoreUser, async (req, res, next) => {
     }
   }
 
-  if (!theReview.dataValues.id) {
-    const err = new Error("Review couldn't be found");
-    err.status = 404;
-    return next(err);
-  }
   if (theReview.userId !== req.user.id) {
     const err = new Error(
       "Only the owner of the spot is authorized to add an image"
