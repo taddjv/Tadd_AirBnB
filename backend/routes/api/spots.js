@@ -51,9 +51,14 @@ const validateSpot = [
 
 const validateReview = [
   check("stars")
-    .isLength({
-      max: 6,
-      min: 0,
+    .custom((a) => {
+      if (a < 1) {
+        return false;
+      } else if (a > 5) {
+        return false;
+      } else {
+        return true;
+      }
     })
     .withMessage("Stars must be an integer from 1 to 5"),
   check("review")
@@ -77,6 +82,32 @@ const validateBooking = [
     .withMessage("endDate cannot be on or before startDate"),
   handleValidationErrors,
 ];
+
+const validateQuery = [
+  check("page")
+    .custom((a) => {
+      if (a < 0) {
+        return false;
+      } else if (a > 10) {
+        return false;
+      } else {
+        return true;
+      }
+    })
+    .withMessage("Page must be greater than or equal to 0"),
+  check("size")
+    .custom((a) => {
+      if (a < 0) {
+        return false;
+      } else if (a > 20) {
+        return false;
+      } else {
+        return true;
+      }
+    })
+    .withMessage("Size must be greater than or equal to 0"),
+];
+
 //! get all bookings for a spot from spot id
 router.get("/:spotId/bookings", restoreUser, async (req, res, next) => {
   const theSpot = await Spot.findOne({
@@ -357,8 +388,14 @@ router.post("/", restoreUser, validateSpot, async (req, res) => {
 });
 
 //! Get all Spots
-router.get("/", async (req, res) => {
-  const spots = await Spot.findAll();
+router.get("/", validateQuery, async (req, res) => {
+  let { page, size } = req.query;
+  page = page || 0;
+  size = size || 20;
+  const spots = await Spot.findAll({
+    limit: page == 0 ? null : size,
+    offset: size * (page - 1),
+  });
 
   res.json(spots);
 });

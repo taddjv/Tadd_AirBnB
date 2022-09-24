@@ -45,7 +45,6 @@ router.delete("/", (_req, res) => {
   return res.json({ message: "success" });
 });
 
-//!gello
 // Restore session user
 router.get("/", restoreUser, (req, res) => {
   const { user } = req;
