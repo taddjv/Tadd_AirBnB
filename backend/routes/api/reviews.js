@@ -38,7 +38,7 @@ router.post("/:reviewId/images", restoreUser, async (req, res, next) => {
       model: Image,
     },
   });
-  if (!theReview.dataValues.id) {
+  if (!theReview) {
     const err = new Error("Review couldn't be found");
     err.status = 404;
     return next(err);
