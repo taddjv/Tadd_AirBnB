@@ -398,7 +398,7 @@ router.get("/", validateQuery, async (req, res) => {
   page = page || 0;
   size = size || 20;
   const spots = await Spot.findAll({
-    limit: page == 0 ? null : size,
+    limit: page === 0 ? null : size,
     offset: page === 0 ? null : size * Math.abs(page - 1),
   });
 
