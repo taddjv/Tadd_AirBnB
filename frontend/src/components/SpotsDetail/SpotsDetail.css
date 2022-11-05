@@ -1,0 +1,84 @@
+.spot-details {
+  max-width: 70rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.spot-title {
+  color: #222222;
+  font-size: 1.6rem;
+  margin: 1rem 0;
+}
+
+.spot-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.s-i-left {
+  display: flex;
+  gap: 1rem;
+}
+
+.spot-reviews {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.s-i-right {
+  display: flex;
+  gap: 1rem;
+}
+
+.share,
+.save {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.spot-pictures {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 13.25rem 13.25rem;
+  grid-template-areas:
+    "a a b c"
+    "a a d e";
+  gap: 0.5rem;
+  border-radius: 10%;
+}
+
+.s-p1 {
+  grid-area: a;
+}
+.s-p2 {
+  grid-area: b;
+}
+.s-p3 {
+  grid-area: c;
+}
+.s-p4 {
+  grid-area: d;
+}
+.s-p5 {
+  grid-area: e;
+}
+
+.spot-pictures > div > img {
+  width: 100%;
+  height: 100%;
+  /* border-radius: 0px; */
+}
+
+.s-p1 > img {
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+.s-p3 > img {
+  border-top-right-radius: 25px;
+}
+
+.s-p5 > img {
+  border-bottom-right-radius: 25px;
+}

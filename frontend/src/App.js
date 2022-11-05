@@ -4,6 +4,12 @@ import { Route, Switch } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
+import Navigation from "./components/Navigation";
+import SpotsDisplay from "./components/SpotsDisplay";
+import SpotsDetail from "./components/SpotsDetail";
+import Navbar from "./components/Navbar";
+
+import LogInPop from "./components/Navbar/LogInPop";
 
 function App() {
   const dispatch = useDispatch();
@@ -13,16 +19,32 @@ function App() {
   }, [dispatch]);
 
   return (
-    isLoaded && (
-      <Switch>
-        <Route path="/login">
-          <LoginFormPage />
-        </Route>
-        <Route path="/signup">
-          <SignupFormPage />
-        </Route>
-      </Switch>
-    )
+    <>
+      {/* <Navigation isLoaded={isLoaded} /> */}
+      {isLoaded && (
+        <Switch>
+          <Route exact path="/">
+            <Navbar />
+            <div className="body-container">
+              <SpotsDisplay />
+            </div>
+          </Route>
+          <Route path="/login">
+            <LoginFormPage />
+          </Route>
+          <Route path="/signup">
+            <SignupFormPage />
+          </Route>
+          <Route path="/spots/:spotId">
+            <Navbar />
+            <SpotsDetail />
+          </Route>
+          <Route path="/practice">
+            <LogInPop />
+          </Route>
+        </Switch>
+      )}
+    </>
   );
 }
 

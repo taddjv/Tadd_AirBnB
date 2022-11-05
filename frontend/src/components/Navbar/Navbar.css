@@ -1,0 +1,154 @@
+.nav-container {
+  display: flex;
+  height: 5rem;
+  /* background: lightblue; */
+  justify-content: space-between;
+  padding: 0 1rem;
+  padding: 2rem;
+  margin: 0 3rem;
+}
+button {
+  all: unset;
+}
+
+.logo {
+  width: 7rem;
+  height: 7.5rem;
+}
+.nav-middle {
+  display: flex;
+  align-items: center;
+  width: 25rem;
+  background: white;
+}
+.n-v-container {
+  display: flex;
+  justify-content: center;
+  border: 0.5px solid #dddddd;
+  height: 3rem;
+  width: 100%;
+  border-radius: 500px;
+  padding: 0 1.5rem;
+}
+.n-v-container > button {
+  all: unset;
+  align-items: center;
+  width: 100%;
+  height: 3rem;
+
+  text-align: center;
+  /* border: 0.5px solid #dddddd; */
+}
+.addGuests-btn {
+  display: flex;
+  position: absolute; /* for the logo */
+}
+.addGuests-btn-text {
+  width: 70%;
+  position: relative;
+  left: 0rem;
+  top: 0.85rem;
+}
+.addGuests-btn-logo {
+  background: #ff385c;
+  border-radius: 100%;
+  height: 2.25rem;
+  width: 2.25rem;
+  position: relative;
+  left: 6.1rem;
+  bottom: 0.9rem;
+}
+
+.anywhere-btn,
+.anyweek-btn {
+}
+.nav-right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tr-bttn,
+.tr-bttn > img {
+  height: 2rem;
+  width: 2rem;
+}
+.pr-bttn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: 0.5px solid;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  border-radius: 500px;
+}
+
+.pr-bttn > img:nth-child(1) {
+  height: 1rem;
+  width: 1rem;
+}
+.pr-bttn > img:nth-child(2) {
+  height: 2rem;
+  width: 2rem;
+}
+
+.hmbr-logo {
+  height: 1rem;
+  width: 1rem;
+}
+
+.dd-container {
+  position: absolute;
+  left: 80%;
+  top: 17.5%;
+  display: grid;
+  height: 15rem;
+  width: 13rem;
+  background: white;
+  grid-template-rows: 2fr 3fr;
+  padding: 0.5rem 0.5rem;
+  border-radius: 12.5px;
+  /* border: 0.5px solid lightgrey; */
+  box-shadow: 0 0 2px 2px rgba(153, 153, 153, 0.3);
+}
+
+.dd-container > div > div {
+  /* border: solid 0.5px; */
+  height: 2.5rem;
+}
+.dd-container > div > div:hover {
+  background: lightgray;
+}
+
+.dd-below {
+  align-self: end;
+}
+.helpButton,
+.hostExpButton,
+.hostHomeButton,
+.signUpButton,
+.logInButton {
+  display: flex;
+  align-items: center;
+}
+
+.blackout {
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.7;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.LogInForm {
+  background: #ff385c;
+  height: 42.5rem;
+  width: 35rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

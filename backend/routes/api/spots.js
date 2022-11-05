@@ -298,6 +298,7 @@ router.get("/:spotId/reviews", async (req, res, next) => {
       },
     ],
   });
+  console.log(req.params.spotId);
   if (!reviews.length) {
     const err = new Error("Spot couldn't be found");
     err.status = 404;
