@@ -66,7 +66,7 @@ function App() {
             <MyBookings />
           </Route>
           <Route path="/practiceee">
-            <Dropdown />
+            <LoginFormPage />
           </Route>
         </Switch>
       )}

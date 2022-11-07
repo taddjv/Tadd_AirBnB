@@ -1,0 +1,26 @@
+.pp-lo-container {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+}
+
+.pp-lo-container > div {
+  border: 1px solid black;
+  width: 80%;
+  height: 3rem;
+  border-radius: 500px;
+  padding-left: 2rem;
+  display: flex;
+  justify-content: space-between;
+  background: #ff385c;
+  /* color: white; */
+  align-self: center;
+}
+
+.pp-lo-container > div > input {
+  border-top-right-radius: 500px;
+  border-bottom-right-radius: 500px;
+}
