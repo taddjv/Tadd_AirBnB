@@ -1,0 +1,36 @@
+.booking-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 2rem;
+  justify-content: stretch;
+  margin: 2.25rem;
+}
+
+.booking-container > div {
+  border: 3px solid black;
+  margin: 1rem;
+  height: 11rem;
+  padding: 1rem;
+  border-radius: 25px;
+}
+.card-makeChanges {
+  width: 100%;
+}
+.del,
+.card-delete {
+  width: 100%;
+}
+
+.card-makeChanges > button,
+.del > button {
+  background: #ff385c;
+  color: white;
+  height: 1.5rem;
+  width: 100%;
+  text-align: center;
+  border-radius: 500px;
+}
+
+.card-makeChanges > button > a {
+  color: white;
+}

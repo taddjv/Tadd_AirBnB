@@ -1,0 +1,40 @@
+.spots-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding: 2rem;
+  justify-content: stretch;
+  margin: 2.25rem;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  align-items: center;
+}
+
+/* button {
+  background: #ff385c;
+  margin: 0.25rem;
+} */
+
+.del,
+.addIm,
+.makeCh {
+  width: 100%;
+}
+.del > button,
+.addIm > button,
+.makeCh > button {
+  background: #ff385c;
+  margin: 0.25rem;
+  width: 100%;
+  color: white;
+  border-radius: 500px;
+  text-align: center;
+}
+
+.atagg {
+  color: white;
+}

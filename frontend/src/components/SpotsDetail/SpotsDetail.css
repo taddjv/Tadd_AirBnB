@@ -82,3 +82,51 @@
 .s-p5 > img {
   border-bottom-right-radius: 25px;
 }
+
+.sdr-price,
+.sdr-book {
+  max-width: 70rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.start-date,
+.end-date {
+  display: flex;
+  background: #ff385c;
+  justify-content: space-between;
+  height: 5rem;
+  border-radius: 500px;
+  border: 2px solid grey;
+  color: white;
+  margin: 1rem 0;
+}
+
+#start,
+#end {
+  width: 30%;
+  border-top-right-radius: 500px;
+  border-bottom-right-radius: 500px;
+  border: none;
+  font-size: 2rem;
+}
+
+.form-container > div > label {
+  padding-left: 2rem;
+  padding-top: 1.25rem;
+  font-size: 2rem;
+}
+.book-button {
+  border-radius: 500px;
+  border: 2px solid #ff385c;
+  height: 5rem;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.book-button:active {
+  border: 2px solid grey;
+  background: #ff385c;
+  color: white;
+}

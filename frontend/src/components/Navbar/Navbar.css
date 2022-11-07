@@ -98,7 +98,8 @@ button {
   width: 1rem;
 }
 
-.dd-container {
+.dd-container,
+.dd-container2 {
   position: absolute;
   left: 80%;
   top: 17.5%;

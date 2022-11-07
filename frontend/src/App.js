@@ -8,8 +8,14 @@ import Navigation from "./components/Navigation";
 import SpotsDisplay from "./components/SpotsDisplay";
 import SpotsDetail from "./components/SpotsDetail";
 import Navbar from "./components/Navbar";
+import HostHome from "./components/HostHome";
 
 import LogInPop from "./components/Navbar/LogInPop";
+import Dropdown from "./components/Navbar/Dropdown";
+import MyVenues from "./components/MyVenues";
+import EditVenue from "./components/EditVenue.js";
+import MyBookings from "./components/MyBookings";
+import EditBooking from "./components/EditBooking.js";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,7 +30,7 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-            <Navbar />
+            <Navbar isLoaded={isLoaded} />
             <div className="body-container">
               <SpotsDisplay />
             </div>
@@ -39,8 +45,28 @@ function App() {
             <Navbar />
             <SpotsDetail />
           </Route>
-          <Route path="/practice">
-            <LogInPop />
+          <Route path="/host/home">
+            <Navbar />
+            <HostHome />
+          </Route>
+          <Route path="/my/venues/:spotId">
+            <Navbar />
+            <EditVenue />
+          </Route>
+          <Route path="/my/venues">
+            <Navbar />
+            <MyVenues />
+          </Route>
+          <Route path="/my/bookings/:bookingId/spot/:spotId">
+            <Navbar />
+            <EditBooking />
+          </Route>
+          <Route path="/my/bookings">
+            <Navbar />
+            <MyBookings />
+          </Route>
+          <Route path="/practiceee">
+            <Dropdown />
           </Route>
         </Switch>
       )}

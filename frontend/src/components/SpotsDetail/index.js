@@ -84,7 +84,7 @@ function SpotsDetail() {
             <div className="s-p4">
               <img
                 className="sp-four"
-                src="https://cdn.mos.cms.futurecdn.net/CAZ6JXi6huSuN4QGE627NR-1920-80.jpg.webp"
+                src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg"
               />
             </div>
             <div className="s-p5">

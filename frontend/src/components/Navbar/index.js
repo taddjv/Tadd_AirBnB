@@ -44,9 +44,6 @@ const Navbar = () => {
         </div>
       </div>
       <div className="nav-right">
-        <div className="becomeHost">
-          <a href="">Become a Host</a>
-        </div>
         <div className="translateButton">
           <button className="tr-bttn">
             <img src="https://cdn-icons-png.flaticon.com/512/2767/2767210.png"></img>

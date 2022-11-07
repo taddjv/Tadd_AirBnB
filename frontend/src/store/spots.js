@@ -1,6 +1,7 @@
 import { csrfFetch } from "./csrf";
 
 const GET_SPOTS = "spots/GET_SPOTS";
+const GET_CURRENT_SPOTS = "spots/GET_SPOTS";
 const GET_SPOT = "spots/GET_SPOT";
 const GET_SPOTS_USER = "spots/GET_SPOTS_USER";
 const CREATE_SPOT = "spots/CREATE_SPOT";
@@ -10,6 +11,12 @@ const DELETE_SPOT = "spots/DELETE_SPOT";
 const getSpots = (spots) => {
   return {
     type: GET_SPOTS,
+    payload: spots,
+  };
+};
+const getCurrentSpots = (spots) => {
+  return {
+    type: GET_CURRENT_SPOTS,
     payload: spots,
   };
 };
@@ -55,6 +62,12 @@ export const getTheSpots = () => async (dispatch) => {
   dispatch(getSpots(data));
   return response;
 };
+export const getTheCurrentSpots = () => async (dispatch) => {
+  const response = await csrfFetch("/api/spots/current");
+  const data = await response.json();
+  dispatch(getCurrentSpots(data));
+  return response;
+};
 
 export const getTheSpot = (id) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${id}`);
@@ -98,7 +111,7 @@ export const editTheSpot = (spot, spotId) => async (dispatch) => {
     dispatch(editSpot(data));
   }
 };
-export const deleteTheSpot = (spot, spotId) => async (dispatch) => {
+export const deleteTheSpot = (spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: "DELETE",
     headers: {
@@ -117,6 +130,10 @@ const spotsReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case GET_SPOTS:
+      newState = Object.assign({}, state);
+      newState.spots = action.payload;
+      return newState;
+    case GET_CURRENT_SPOTS:
       newState = Object.assign({}, state);
       newState.spots = action.payload;
       return newState;
