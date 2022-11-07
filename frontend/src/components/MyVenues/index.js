@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as spotsActions from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import SpotsIndividual from "../SpotsIndividual";
 import "./MyVenues.css";
@@ -185,9 +186,9 @@ const MyVenues = () => {
                 </div>
                 <div className="makeCh">
                   <button>
-                    <a className="atagg" href={`/my/venues/${ele.id}`}>
+                    <NavLink className="atagg" to={`/my/venues/${ele.id}`}>
                       Make Changes
-                    </a>
+                    </NavLink>
                   </button>
                 </div>
               </div>

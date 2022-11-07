@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 import AirbnbLogo from "./AirbnbLogo";
 import Dropdown from "./Dropdown";
@@ -14,9 +15,9 @@ const Navbar = () => {
     <div className="nav-container">
       {dropdown}
       <div className="nav-left">
-        <a href="/">
+        <NavLink to="/">
           <AirbnbLogo />
-        </a>
+        </NavLink>
       </div>
       <div className="nav-middle">
         <div className="n-v-container">

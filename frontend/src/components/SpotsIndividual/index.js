@@ -5,7 +5,7 @@ import { ReactComponent as Logo } from "./star-solid.svg";
 
 function SpotsIndividual({ spot }) {
   return (
-    <NavLink to={`/spots/${spot.id}`} target="_blank">
+    <NavLink to={`/spots/${spot.id}`}>
       <div className="card">
         <div className="top">
           <img src={spot.previewImage} />

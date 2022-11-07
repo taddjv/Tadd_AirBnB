@@ -16,13 +16,21 @@ function SpotsDetail() {
   const dispatch = useDispatch();
   const spot = useSelector((state) => state.spots.spot);
   const reviews = useSelector((state) => state.reviews);
+  const spots = useSelector((state) => state.spots);
 
   //? spot also needs reviews
 
   useEffect(() => {
+    dispatch(spotsActions.getTheSpots());
     dispatch(spotsActions.getTheSpot(spotId));
     dispatch(reviewsActions.getTheReviewsSpot(spotId));
   }, []);
+  if (spot) {
+    console.log(spots.spots.find((ele) => ele.id == spotId).previewImage);
+    // console.log(spots.spots[0].id);
+    console.log(spotId);
+  }
+  // console.log(spot.Images);
 
   if (!spot) {
     //? i want a 404 page
@@ -63,36 +71,19 @@ function SpotsDetail() {
             </div>
           </div>
           <div className="spot-pictures">
-            <div className="s-p1">
+            <div className={`s-p1`}>
               <img
-                className="sp-one"
-                src="https://cdn.mos.cms.futurecdn.net/CAZ6JXi6huSuN4QGE627NR-1920-80.jpg.webp"
+                src={spots.spots.find((ele) => ele.id == spotId).previewImage}
               />
             </div>
-            <div className="s-p2">
-              <img
-                className="sp-two"
-                src="https://cdn.mos.cms.futurecdn.net/CAZ6JXi6huSuN4QGE627NR-1920-80.jpg.webp"
-              />
-            </div>
-            <div className="s-p3">
-              <img
-                className="sp-three"
-                src="https://cdn.mos.cms.futurecdn.net/CAZ6JXi6huSuN4QGE627NR-1920-80.jpg.webp"
-              />
-            </div>
-            <div className="s-p4">
-              <img
-                className="sp-four"
-                src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg"
-              />
-            </div>
-            <div className="s-p5">
-              <img
-                className="sp-five"
-                src="https://cdn.mos.cms.futurecdn.net/CAZ6JXi6huSuN4QGE627NR-1920-80.jpg.webp"
-              />
-            </div>
+
+            {spot.Images.slice(1, 5).map((ele, i) => {
+              return (
+                <div className={`s-p${i + 2}`}>
+                  <img src={ele.url} />
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className="spot-description">

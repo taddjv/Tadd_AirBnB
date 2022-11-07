@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { signup } from "../../store/session";
 import * as sessionActions from "../../store/session";
+import { NavLink } from "react-router-dom";
 import LogInPop from "./LogInPop";
 import SignUpPop from "./SigninPop";
 
@@ -34,19 +35,19 @@ const Dropdown = () => {
             <button className="lo-bttn">Log out</button>
           </div>
           <div onClick className="hostYourHomeButton">
-            <a href="/host/home">
+            <NavLink to="/host/home">
               <button className="hyh-bttn">Host your home</button>
-            </a>
+            </NavLink>
           </div>
           <div onClick className="manageMyVenuesButton">
-            <a href="/my/venues">
+            <NavLink to="/my/venues">
               <button className="mmv-bttn">Manage my venues</button>
-            </a>
+            </NavLink>
           </div>
           <div onClick className="manageBookingsButton">
-            <a href="/my/bookings">
+            <NavLink to="/my/bookings">
               <button className="mb-bttn">Manage bookings</button>
-            </a>
+            </NavLink>
           </div>
         </div>
       </>

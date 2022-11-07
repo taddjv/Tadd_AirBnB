@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import * as bookingsActions from "../../store/bookings";
 import * as spotsActions from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
@@ -58,9 +59,11 @@ const MyBookings = () => {
                   </div>
                   <div className="card-makeChanges">
                     <button>
-                      <a href={`/my/bookings/${ele.id}/spot/${ele.Spot.id}`}>
+                      <NavLink
+                        to={`/my/bookings/${ele.id}/spot/${ele.Spot.id}`}
+                      >
                         Make Changes
-                      </a>
+                      </NavLink>
                     </button>
                   </div>
                 </div>
