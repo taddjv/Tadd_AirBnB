@@ -331,7 +331,7 @@ router.get("/:spotId", async (req, res, next) => {
       id: req.params.spotId,
     },
     attributes: {
-      exclude: ["avgRating", "previewImage"],
+      exclude: ["avgRating"],
     },
     include: [
       {
@@ -377,8 +377,18 @@ router.get("/:spotId", async (req, res, next) => {
 
 //! Create a Spot
 router.post("/", restoreUser, validateSpot, async (req, res) => {
-  const { address, city, state, country, lat, lng, name, description, price } =
-    req.body;
+  const {
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price,
+    previewImage,
+  } = req.body;
   const { id } = req.user;
 
   const newSpot = await Spot.create({
@@ -392,6 +402,7 @@ router.post("/", restoreUser, validateSpot, async (req, res) => {
     description,
     price,
     ownerId: id,
+    previewImage,
   });
   res.json(newSpot);
 });

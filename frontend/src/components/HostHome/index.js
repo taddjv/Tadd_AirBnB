@@ -15,6 +15,7 @@ const HostHome = () => {
   const [latitude, setLatitude] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [image, setImage] = useState("");
   const [errors, setErrors] = useState([]);
 
   const onSubmit = (e) => {
@@ -29,12 +30,14 @@ const HostHome = () => {
       name,
       description,
       price,
+      previewImage: image,
     };
 
     dispatch(spotActions.createTheSpot(createdSpot)).catch(async (res) => {
       const data = await res.json();
       if (data && data.errors) setErrors(data.errors);
     });
+
     setAddress("");
     setName("");
     setCity("");
@@ -46,9 +49,7 @@ const HostHome = () => {
     setPrice("");
     setErrors([]);
   };
-  useEffect(() => {
-    // console.log(country);
-  }, [country]);
+  useEffect(() => {}, [country]);
 
   return (
     <>
@@ -144,6 +145,16 @@ const HostHome = () => {
             value={price}
             id="price"
             type="number"
+          />
+        </div>
+        <p> image isn't needed</p>
+        <div className="spotImage">
+          <label htmlFor="image">Preview Image:</label>
+          <input
+            onChange={(e) => setImage(e.target.value)}
+            value={image}
+            id="image"
+            type="string"
           />
         </div>
         <button className="book-button">Submit</button>

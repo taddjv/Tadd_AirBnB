@@ -16,6 +16,7 @@ import MyVenues from "./components/MyVenues";
 import EditVenue from "./components/EditVenue.js";
 import MyBookings from "./components/MyBookings";
 import EditBooking from "./components/EditBooking.js";
+import AddImage from "./components/AddImage";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,10 @@ function App() {
           <Route path="/host/home">
             <Navbar />
             <HostHome />
+          </Route>
+          <Route path="/my/venues/add-image/:spotId">
+            <Navbar />
+            <AddImage />
           </Route>
           <Route path="/my/venues/:spotId">
             <Navbar />

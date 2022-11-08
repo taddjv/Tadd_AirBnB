@@ -182,7 +182,12 @@ const MyVenues = () => {
                 </div>
                 {deleteMessage}
                 <div className="addIm">
-                  <button>Add Images</button>
+                  <NavLink
+                    className="ataggg"
+                    to={`/my/venues/add-image/${ele.id}`}
+                  >
+                    Add Images
+                  </NavLink>
                 </div>
                 <div className="makeCh">
                   <button>

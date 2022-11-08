@@ -15,11 +15,11 @@ function LoginFormPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //! ERRORS AINT WORKING BRUH
     setErrors([]);
     return dispatch(sessionActions.login({ credential, password })).catch(
       async (res) => {
         const data = await res.json();
+        console.log(data);
         if (data && data.message) setErrors([data.message]);
       }
     );

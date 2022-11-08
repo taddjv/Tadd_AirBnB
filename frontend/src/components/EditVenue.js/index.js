@@ -18,6 +18,7 @@ const EditVenue = () => {
   const [latitude, setLatitude] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [image, setImage] = useState("");
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const EditVenue = () => {
       name,
       description,
       price,
+      previewImage: image,
     };
 
     dispatch(spotsActions.editTheSpot(editedSpot, spotId)).catch(
@@ -179,6 +181,16 @@ const EditVenue = () => {
               value={price}
               id="price"
               type="number"
+            />
+          </div>
+          <p> image isn't needed</p>
+          <div className="spotImage">
+            <label htmlFor="image">Preview Image:</label>
+            <input
+              onChange={(e) => setImage(e.target.value)}
+              value={image}
+              id="image"
+              type="string"
             />
           </div>
           <button className="book-button">Submit</button>

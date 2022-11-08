@@ -15,7 +15,8 @@
 .spotLongitude,
 .spotLatitude,
 .spotDescription,
-.spotPrice {
+.spotPrice,
+.spotImage {
   display: flex;
   background: #ff385c;
   justify-content: space-between;
@@ -34,7 +35,8 @@
 #longitude,
 #latitude,
 #description,
-#price {
+#price,
+#image {
   width: 40%;
   border-top-right-radius: 500px;
   border-bottom-right-radius: 500px;

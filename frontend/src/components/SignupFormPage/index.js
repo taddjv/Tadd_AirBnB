@@ -16,6 +16,7 @@ function SignupFormPage() {
   const [errors, setErrors] = useState([]);
 
   if (sessionUser) return <Redirect to="/" />;
+  let sessionn = null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,6 +32,8 @@ function SignupFormPage() {
         })
       ).catch(async (res) => {
         const data = await res.json();
+        console.log(data);
+        if (data && data.message) sessionn = <>invalid credentials</>;
         if (data && data.errors) setErrors(data.errors);
       });
     }
@@ -45,6 +48,7 @@ function SignupFormPage() {
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
+        <li>{sessionn}</li>
       </ul>
       <div className="email">
         <label>Email</label>
