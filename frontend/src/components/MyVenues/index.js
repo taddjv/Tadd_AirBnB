@@ -182,12 +182,14 @@ const MyVenues = () => {
                 </div>
                 {deleteMessage}
                 <div className="addIm">
-                  <NavLink
-                    className="ataggg"
-                    to={`/my/venues/add-image/${ele.id}`}
-                  >
-                    Add Images
-                  </NavLink>
+                  <button>
+                    <NavLink
+                      className="ataggg"
+                      to={`/my/venues/add-image/${ele.id}`}
+                    >
+                      Add Images
+                    </NavLink>
+                  </button>
                 </div>
                 <div className="makeCh">
                   <button>
