@@ -102,7 +102,7 @@ button {
 .dd-container2 {
   position: absolute;
   left: 80%;
-  top: 17.5%;
+  top: 10%;
   display: grid;
   height: 15rem;
   width: 13rem;
@@ -152,4 +152,22 @@ button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.dd-container2 > div {
+  height: 55px;
+  color: black;
+}
+
+.dd-container2 > div > button {
+  padding: 15px 0;
+}
+
+.dd-container2 > div > a > button {
+  height: 55px;
+  color: black;
+}
+
+.dd-container2 > div:hover {
+  background: lightgray;
 }
