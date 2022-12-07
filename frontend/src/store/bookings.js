@@ -31,16 +31,17 @@ const editBooking = (booking) => {
     payload: booking,
   };
 };
-const deleteBooking = (booking) => {
+const deleteBooking = (bookingId) => {
   return {
     type: DELETE_BOOKING,
-    payload: booking,
+    payload: bookingId,
   };
 };
 
 export const getTheBookingsUser = () => async (dispatch) => {
   const response = await csrfFetch("/api/bookings/current");
   const data = await response.json();
+  console.log(data);
   dispatch(getBookingsUser(data));
   return response;
 };
@@ -64,7 +65,11 @@ export const createTheBooking = (booking, spotId) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(createBooking(data));
+    console.log(data);
+    return "dispatchh";
   }
+  console.log(response);
+  return "no dispatch";
 };
 
 export const editTheBooking = (booking, bookingId) => async (dispatch) => {
@@ -90,19 +95,23 @@ export const deleteTheBooking = (bookingId) => async (dispatch) => {
     },
   });
   if (response.ok) {
-    const data = await response.json();
-    dispatch(deleteBooking(data));
+    dispatch(deleteBooking(bookingId));
+    return true;
   }
+  return false;
 };
 
-const initialState = {};
+const initialState = { bookings: {} };
 
 const bookingsReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case GET_BOOKINGS_USER:
       newState = Object.assign({}, state);
-      newState.bookings = action.payload;
+      newState.bookings = {};
+      action.payload.forEach((ele) => {
+        newState.bookings[ele.id] = ele;
+      });
       return newState;
     case GET_BOOKINGS_SPOT:
       newState = Object.assign({}, state);
@@ -118,7 +127,8 @@ const bookingsReducer = (state = initialState, action) => {
       return newState;
     case DELETE_BOOKING:
       newState = Object.assign({}, state);
-      newState.bookings = action.payload;
+      console.log(newState);
+      delete newState.bookings[action.payload];
       return newState;
     default:
       return state;

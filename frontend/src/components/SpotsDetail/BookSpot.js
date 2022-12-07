@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import bookingsReducer, * as bookingsActions from "../../store/bookings";
 import StarLogo from "./StarLogo";
 
 const BookSpot = ({ spot, spotId }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const booking = useSelector((state) => state.bookings);
 
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [errors, setErrors] = useState([]);
-  const [booked, setBooked] = useState(false);
+  const [booked, setBooked] = useState("");
+  const [done, setDone] = useState(false);
 
-  const createdSpotMessage = booked ? <>Successfully booked </> : null;
+  const createdSpotMessage =
+    booked === "yes" ? <>Successfully booked </> : null;
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -19,25 +24,24 @@ const BookSpot = ({ spot, spotId }) => {
       startDate: new Date(startDate),
       endDate: new Date(endDate),
     };
+    setBooked("yes");
+
     dispatch(bookingsActions.createTheBooking(bookingInfo, spotId)).catch(
       async (res) => {
         const data = await res.json();
+        setBooked("no");
         if (data && data.errors) setErrors(data.errors);
         if (data && !data.errors) {
           if (data && data.message) setErrors([data.message]);
         }
       }
     );
+
     setStartDate("");
     setEndDate("");
     setErrors([]);
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      setBooked(false);
-    }, 1000);
-  }, [booked]);
   return (
     <>
       <div className="sdr-price">${spot.price} CAD night</div>

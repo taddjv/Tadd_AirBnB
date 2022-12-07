@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import * as spotActions from "../../store/spots";
 import "./HostHome.css";
 
 const HostHome = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const spot = useSelector((state) => state.spots);
 
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -49,7 +52,12 @@ const HostHome = () => {
     setPrice("");
     setErrors([]);
   };
-  useEffect(() => {}, [country]);
+  useEffect(() => {
+    if (spot.spots) {
+      history.push(`/spots/${spot.spots.id}`);
+      history.go(0);
+    }
+  }, [spot]);
 
   return (
     <>

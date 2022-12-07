@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink, useHistory } from "react-router-dom";
 import * as spotsActions from "../../store/spots";
 import "./EditVenue.css";
 
 const EditVenue = () => {
   const { spotId } = useParams();
   const dispatch = useDispatch();
+  const history = useHistory();
   const spot = useSelector((state) => state.spots.spot);
 
   const [name, setName] = useState("");
@@ -56,7 +57,10 @@ const EditVenue = () => {
     setDescription("");
     setPrice("");
     setErrors([]);
+    history.push(`/spots/${spot.id}`);
+    history.go(0);
   };
+
   const renderedSpot = spot ? (
     <NavLink to={`/spots/${spot.id}`} target="_blank">
       <div className="card">

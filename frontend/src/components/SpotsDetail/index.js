@@ -25,12 +25,6 @@ function SpotsDetail() {
     dispatch(spotsActions.getTheSpot(spotId));
     dispatch(reviewsActions.getTheReviewsSpot(spotId));
   }, []);
-  if (spot) {
-    console.log(spots.spots.find((ele) => ele.id == spotId).previewImage);
-    // console.log(spots.spots[0].id);
-    console.log(spotId);
-  }
-  // console.log(spot.Images);
 
   if (!spot) {
     //? i want a 404 page

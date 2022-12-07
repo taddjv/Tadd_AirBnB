@@ -8,36 +8,24 @@ import "./MyBookings.css";
 
 const MyBookings = () => {
   const dispatch = useDispatch();
-  const bookings = useSelector((state) => state.bookings);
-  const spots = [];
+  const bookingsObj = useSelector((state) => state.bookings);
+  // console.log(bookingsObj);
+  const bookings = Object.values(bookingsObj.bookings);
   const [deleted, setDeleted] = useState(false);
   const deleteMessage = deleted ? <>deleted</> : null;
-
+  // console.log(bookings, "hello");
   useEffect(() => {
     dispatch(bookingsActions.getTheBookingsUser());
-    setTimeout(() => {
-      setDeleted(false);
-    }, 200);
-  }, [deleted]);
-
-  if (bookings.bookings) {
-    if (!bookings.bookings.message) {
-      bookings.bookings.forEach((ele) => {
-        spots.push(ele.Spot);
-      });
-    }
-    // bookings.bookings.forEach((ele) => {
-    //   spots.push(ele.Spot);
-    // });
-  }
-
-  if (!bookings.bookings) {
-    return <>deleted</>;
+  }, []);
+  if (!bookings.length) {
+    return null;
   } else {
-    if (!bookings.bookings.message) {
-      return (
-        <div className="booking-container">
-          {bookings.bookings.map((ele) => {
+    return (
+      <div className="booking-container">
+        {bookings &&
+          bookings.length &&
+          bookings.map((ele) => {
+            console.log(ele);
             return (
               <>
                 <div className="card">
@@ -55,7 +43,7 @@ const MyBookings = () => {
                     >
                       <button>Delete</button>
                     </div>
-                    {deleteMessage}
+                    {/* {deleteMessage} */}
                   </div>
                   <div className="card-makeChanges">
                     <button>
@@ -70,9 +58,8 @@ const MyBookings = () => {
               </>
             );
           })}
-        </div>
-      );
-    }
+      </div>
+    );
   }
 };
 

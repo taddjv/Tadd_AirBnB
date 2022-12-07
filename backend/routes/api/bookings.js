@@ -50,6 +50,9 @@ router.get("/current", restoreUser, async (req, res) => {
       },
     },
   });
+  // const bookingsObj =  {
+  // Bookings: bookings
+  // }
 
   res.json(bookings);
 });
