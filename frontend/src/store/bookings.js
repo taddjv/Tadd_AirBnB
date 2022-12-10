@@ -41,7 +41,7 @@ const deleteBooking = (bookingId) => {
 export const getTheBookingsUser = () => async (dispatch) => {
   const response = await csrfFetch("/api/bookings/current");
   const data = await response.json();
-  console.log(data);
+
   dispatch(getBookingsUser(data));
   return response;
 };
@@ -65,10 +65,10 @@ export const createTheBooking = (booking, spotId) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(createBooking(data));
-    console.log(data);
+
     return "dispatchh";
   }
-  console.log(response);
+
   return "no dispatch";
 };
 
@@ -127,7 +127,7 @@ const bookingsReducer = (state = initialState, action) => {
       return newState;
     case DELETE_BOOKING:
       newState = Object.assign({}, state);
-      console.log(newState);
+
       delete newState.bookings[action.payload];
       return newState;
     default:

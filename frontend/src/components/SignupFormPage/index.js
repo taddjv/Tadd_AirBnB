@@ -32,7 +32,7 @@ function SignupFormPage() {
         })
       ).catch(async (res) => {
         const data = await res.json();
-        console.log(data);
+
         if (data && data.message) sessionn = <>invalid credentials</>;
         if (data && data.errors) setErrors(data.errors);
       });
@@ -44,6 +44,7 @@ function SignupFormPage() {
 
   return (
     <form className="pp-lo-container" onSubmit={handleSubmit}>
+      <h1 className="su-title">Sign Up</h1>
       <ul>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
@@ -51,18 +52,18 @@ function SignupFormPage() {
         <li>{sessionn}</li>
       </ul>
       <div className="email">
-        <label>Email</label>
         <input
           type="text"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
       </div>
       <div className="firstName">
-        <label>firstName</label>
         <input
           type="text"
+          placeholder="First Name"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
           required
@@ -70,42 +71,42 @@ function SignupFormPage() {
       </div>
 
       <div className="lastName">
-        <label>lastName</label>
         <input
           type="text"
+          placeholder="Last Name"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
           required
         />
       </div>
       <div className="username">
-        <label>Username</label>
         <input
           type="text"
+          placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
         />
       </div>
       <div className="password">
-        <label>Password</label>
         <input
           type="password"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
       </div>
       <div className="cpassword">
-        <label>Confirm Password</label>
         <input
           type="password"
+          placeholder="Confirm Password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
       </div>
-      <div className="book-button">
+      <div className="pp-lo-bottom">
         <button type="submit">Sign Up</button>
       </div>
     </form>

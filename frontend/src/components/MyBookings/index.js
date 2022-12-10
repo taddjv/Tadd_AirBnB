@@ -9,23 +9,22 @@ import "./MyBookings.css";
 const MyBookings = () => {
   const dispatch = useDispatch();
   const bookingsObj = useSelector((state) => state.bookings);
-  // console.log(bookingsObj);
+
   const bookings = Object.values(bookingsObj.bookings);
   const [deleted, setDeleted] = useState(false);
   const deleteMessage = deleted ? <>deleted</> : null;
-  // console.log(bookings, "hello");
+
   useEffect(() => {
     dispatch(bookingsActions.getTheBookingsUser());
   }, []);
   if (!bookings.length) {
-    return null;
+    return <>no bookings !</>;
   } else {
     return (
       <div className="booking-container">
         {bookings &&
           bookings.length &&
           bookings.map((ele) => {
-            console.log(ele);
             return (
               <>
                 <div className="card">

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
-import AirbnbLogo from "./AirbnbLogo";
 import Dropdown from "./Dropdown";
+import logo from "./aLogo.png";
 
 const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -16,15 +16,10 @@ const Navbar = () => {
       {dropdown}
       <div className="nav-left">
         <NavLink to="/">
-          <AirbnbLogo />
+          <img src={logo} width="32" height="32" />
         </NavLink>
       </div>
       <div className="nav-right">
-        <div className="translateButton">
-          <button className="tr-bttn">
-            <img src="https://cdn-icons-png.flaticon.com/512/2767/2767210.png"></img>
-          </button>
-        </div>
         <div className="profileButton">
           <button
             onClick={() => setShowDropdown(!showDropdown)}

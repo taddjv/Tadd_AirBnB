@@ -15,19 +15,15 @@ function SpotsDetail() {
   const { spotId } = useParams();
   const dispatch = useDispatch();
   const spot = useSelector((state) => state.spots.spot);
-  const reviews = useSelector((state) => state.reviews);
-  const spots = useSelector((state) => state.spots);
 
-  //? spot also needs reviews
+  const spots = useSelector((state) => state.spots);
 
   useEffect(() => {
     dispatch(spotsActions.getTheSpots());
     dispatch(spotsActions.getTheSpot(spotId));
-    dispatch(reviewsActions.getTheReviewsSpot(spotId));
   }, []);
 
   if (!spot) {
-    //? i want a 404 page
     return null;
   } else {
     return (

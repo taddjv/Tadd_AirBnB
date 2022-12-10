@@ -17,13 +17,12 @@
 .spotDescription,
 .spotPrice,
 .spotImage {
-  display: flex;
-  background: #ff385c;
-  justify-content: space-between;
-  height: 5rem;
-  border-radius: 500px;
-  border: 2px solid grey;
-  color: white;
+  width: 70%;
+  height: 10%;
+
+  margin: 0 auto;
+  border-radius: 10px;
+  text-align: center;
 }
 
 #name,
@@ -37,14 +36,64 @@
 #description,
 #price,
 #image {
-  width: 40%;
-  border-top-right-radius: 500px;
-  border-bottom-right-radius: 500px;
-  border: none;
+  padding: 10px;
+  /* background: #ff385c; */
+  border: 0;
+  outline: 0;
+  border-bottom: solid 1px black;
+  /* margin-left: 10px; */
+  color: black;
+  width: 70%;
+}
+#name:focus,
+#address:focus,
+#city:focus,
+#state:focus,
+#country:focus,
+#country:focus,
+#longitude:focus,
+#latitude:focus,
+#description:focus,
+#price:focus,
+#image:focus {
+  outline: none;
+  border: 1px solid black;
+  box-shadow: 0 0 5px black;
 }
 
 .formContainer > div > label {
   padding-left: 2rem;
   padding-top: 1.25rem;
   font-size: 2rem;
+}
+
+::placeholder {
+  color: black;
+  opacity: 1;
+}
+
+.hh-button {
+  height: 50px;
+  width: 50%;
+  text-align: center;
+  border: 2px solid;
+  font-size: 20px;
+  transition: 0.3s;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.hh-button:hover {
+  background: #ff385c;
+  opacity: 0.3;
+  color: white;
+}
+
+.formContainer > ul {
+  list-style-type: none;
+}
+
+.formContainer > ul > li {
+  color: #ff385c;
+  text-align: center;
 }

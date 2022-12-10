@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink, useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import * as spotsActions from "../../store/spots";
 import "./EditVenue.css";
 
@@ -9,7 +10,6 @@ const EditVenue = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const spot = useSelector((state) => state.spots.spot);
-
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -21,44 +21,45 @@ const EditVenue = () => {
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
   const [errors, setErrors] = useState([]);
+  const [redir, setRedir] = useState(false);
 
   useEffect(() => {
     dispatch(spotsActions.getTheSpot(spotId));
-  }, [name]);
+  }, []);
 
   const onSubmit = (e) => {
     e.preventDefault();
     const editedSpot = {
-      address,
-      city,
-      state,
-      country: country,
-      lat: latitude,
-      lng: longitude,
-      name,
-      description,
-      price,
-      previewImage: image,
+      address: address || spot.address,
+      city: city || spot.city,
+      state: state || spot.state,
+      country: country || spot.country,
+      lat: latitude || spot.lat,
+      lng: longitude || spot.lng,
+      name: name || spot.name,
+      description: description || spot.description,
+      price: price || spot.price,
+      previewImage: image || spot.previewImage,
     };
 
-    dispatch(spotsActions.editTheSpot(editedSpot, spotId)).catch(
-      async (res) => {
+    dispatch(spotsActions.editTheSpot(editedSpot, spotId))
+      .then(() => {
+        setAddress("");
+        setName("");
+        setCity("");
+        setState("");
+        setCountry("");
+        setLongitude("");
+        setLatitude("");
+        setDescription("");
+        setPrice("");
+        setErrors([]);
+        setRedir(true);
+      })
+      .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
-      }
-    );
-    setAddress("");
-    setName("");
-    setCity("");
-    setState("");
-    setCountry("");
-    setLongitude("");
-    setLatitude("");
-    setDescription("");
-    setPrice("");
-    setErrors([]);
-    history.push(`/spots/${spot.id}`);
-    history.go(0);
+      });
   };
 
   const renderedSpot = spot ? (
@@ -91,115 +92,118 @@ const EditVenue = () => {
 
   return (
     <>
-      <>
-        {renderedSpot}
-        <form className="formContainer" onSubmit={onSubmit}>
-          <div className="title">
-            <h1>Edit your home !</h1>
-          </div>
-          <ul>
-            {errors.map((ele) => (
-              <li>{ele}</li>
-            ))}
-          </ul>
-          <div className="spotName">
-            <label htmlFor="name">Name:</label>
-            <input
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-              id="name"
-              type="text"
-            />
-          </div>
-          <div className="spotAddress">
-            <label htmlFor="address">Address:</label>
-            <input
-              onChange={(e) => setAddress(e.target.value)}
-              value={address}
-              id="address"
-              type="text"
-            />
-          </div>
-          <div className="spotCity">
-            <label htmlFor="city">City:</label>
-            <input
-              onChange={(e) => setCity(e.target.value)}
-              value={city}
-              id="city"
-              type="text"
-            />
-          </div>
-          <div className="spotState">
-            <label htmlFor="state">State:</label>
-            <input
-              onChange={(e) => setState(e.target.value)}
-              value={state}
-              id="state"
-              type="text"
-            />
-          </div>
-          <div className="spotCountry">
-            <label htmlFor="country">Country:</label>
-            <select
-              onChange={(e) => setCountry(e.target.value)}
-              value={country}
-              id="country"
-            >
-              <option value="">Select country</option>
-              <option value="United States">United States</option>
-              <option value="Canada">Canada</option>
-              <option value="Germany">Germany</option>
-              <option value="France">France</option>
-            </select>
-          </div>
-          <div className="spotLongitude">
-            <label htmlFor="longitude">Longitude:</label>
-            <input
-              onChange={(e) => setLongitude(e.target.value)}
-              value={longitude}
-              id="longitude"
-              type="number"
-            />
-          </div>
-          <div className="spotLatitude">
-            <label htmlFor="latitude">Latitude:</label>
-            <input
-              onChange={(e) => setLatitude(e.target.value)}
-              value={latitude}
-              id="latitude"
-              type="number"
-            />
-          </div>
-          <div className="spotDescription">
-            <label htmlFor="description">Description:</label>
-            <textarea
-              onChange={(e) => setDescription(e.target.value)}
-              value={description}
-              id="description"
-            ></textarea>
-          </div>
-          <div className="spotPrice">
-            <label htmlFor="price">Price:</label>
-            <input
-              onChange={(e) => setPrice(e.target.value)}
-              value={price}
-              id="price"
-              type="number"
-            />
-          </div>
-          <p> image isn't needed</p>
-          <div className="spotImage">
-            <label htmlFor="image">Preview Image:</label>
-            <input
-              onChange={(e) => setImage(e.target.value)}
-              value={image}
-              id="image"
-              type="string"
-            />
-          </div>
-          <button className="book-button">Submit</button>
-        </form>
-      </>
+      {redir && <Redirect to={`/spots/${spotId}`} />};
+      {spot && (
+        <>
+          {renderedSpot}
+
+          <form className="formContainer" onSubmit={onSubmit}>
+            <div className="title">
+              <h1>Edit your home !</h1>
+            </div>
+            <ul>
+              {errors.map((ele) => (
+                <li>{ele}</li>
+              ))}
+            </ul>
+            <div className="spotName">
+              <input
+                onChange={(e) => setName(e.target.value)}
+                value={name || spot.name}
+                placeholder="Name"
+                id="name"
+                type="text"
+              />
+            </div>
+            <div className="spotAddress">
+              <input
+                onChange={(e) => setAddress(e.target.value)}
+                value={address || spot.address}
+                placeholder="Address"
+                id="address"
+                type="text"
+              />
+            </div>
+            <div className="spotCity">
+              <input
+                onChange={(e) => setCity(e.target.value)}
+                value={city || spot.city}
+                placeholder="City"
+                id="city"
+                type="text"
+              />
+            </div>
+            <div className="spotState">
+              <input
+                onChange={(e) => setState(e.target.value)}
+                value={state || spot.state}
+                placeholder="State"
+                id="state"
+                type="text"
+              />
+            </div>
+            <div className="spotCountry">
+              <select
+                onChange={(e) => setCountry(e.target.value)}
+                value={country || spot.country}
+                id="country"
+              >
+                <option value="">Select Country</option>
+                <option value="United States">United States</option>
+                <option value="Canada">Canada</option>
+                <option value="Germany">Germany</option>
+                <option value="France">France</option>
+              </select>
+            </div>
+            <div className="spotLongitude">
+              <input
+                onChange={(e) => setLongitude(e.target.value)}
+                value={longitude || spot.lng}
+                placeholder="Longitude"
+                id="longitude"
+                type="number"
+              />
+            </div>
+            <div className="spotLatitude">
+              <input
+                onChange={(e) => setLatitude(e.target.value)}
+                value={latitude || spot.lat}
+                placeholder="Latitude"
+                id="latitude"
+                type="number"
+              />
+            </div>
+            <div className="spotDescription">
+              <textarea
+                onChange={(e) => setDescription(e.target.value)}
+                value={description || spot.description}
+                placeholder="Description"
+                id="description"
+              ></textarea>
+            </div>
+            <div className="spotPrice">
+              <input
+                onChange={(e) => setPrice(e.target.value)}
+                value={price || spot.price}
+                placeholder="Price"
+                id="price"
+                type="number"
+              />
+            </div>
+
+            <div className="spotImage">
+              <input
+                onChange={(e) => setImage(e.target.value)}
+                value={image || spot.previewImage}
+                id="image"
+                placeholder="Preview Image (not needed)"
+                type="string"
+              />
+            </div>
+            <button className="hh-button">Submit</button>
+          </form>
+        </>
+      )}
     </>
   );
 };

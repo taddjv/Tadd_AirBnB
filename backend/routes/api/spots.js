@@ -115,8 +115,6 @@ router.get("/:spotId/bookings", restoreUser, async (req, res, next) => {
       id: req.params.spotId,
     },
   });
-  // console.log(req.user === theSpot.ownerId);
-  // console.log(theSpot);
 
   if (!theSpot) {
     const err = new Error("Spot couldn't be found");
@@ -301,7 +299,7 @@ router.get("/:spotId/reviews", async (req, res, next) => {
       },
     ],
   });
-  console.log(req.params.spotId);
+
   if (!reviews.length) {
     const err = new Error("Spot couldn't be found");
     err.status = 404;

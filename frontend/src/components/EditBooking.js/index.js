@@ -15,6 +15,10 @@ const EditBooking = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [errors, setErrors] = useState([]);
+  const [booked, setBooked] = useState("");
+
+  const editedSpotMessage =
+    booked === "yes" ? <>Successfully edited booking </> : null;
 
   useEffect(() => {
     dispatch(spotsActions.getTheSpot(spotId));
@@ -26,10 +30,11 @@ const EditBooking = () => {
       startDate: new Date(startDate),
       endDate: new Date(endDate),
     };
-
+    setBooked("yes");
     dispatch(bookingsActions.editTheBooking(editedBooking, bookingId)).catch(
       async (res) => {
         const data = await res.json();
+        setBooked("no");
         if (data && data.errors) setErrors(data.errors);
       }
     );
@@ -79,6 +84,7 @@ const EditBooking = () => {
               <li>{ele}</li>
             ))}
           </ul>
+          {editedSpotMessage}
           <div className="start-date">
             <label htmlFor="start">Start date:</label>
             <input

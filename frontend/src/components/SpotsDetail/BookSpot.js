@@ -13,7 +13,6 @@ const BookSpot = ({ spot, spotId }) => {
   const [endDate, setEndDate] = useState("");
   const [errors, setErrors] = useState([]);
   const [booked, setBooked] = useState("");
-  const [done, setDone] = useState(false);
 
   const createdSpotMessage =
     booked === "yes" ? <>Successfully booked </> : null;

@@ -11,21 +11,20 @@ function SpotsDisplay() {
   useEffect(() => {
     dispatch(spotsActions.getTheSpots());
   }, []);
-  if (!spots.spots) {
-    return null;
-  } else {
-    return (
-      <>
-        {spots.spots.map((ele) => {
+
+  return (
+    <>
+      {spots.spots &&
+        spots.spots.length &&
+        spots.spots.map((ele) => {
           return (
             <>
               <SpotsIndividual spot={ele} />
             </>
           );
         })}
-      </>
-    );
-  }
+    </>
+  );
 }
 
 export default SpotsDisplay;

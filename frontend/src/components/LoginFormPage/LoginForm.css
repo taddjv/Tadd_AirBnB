@@ -1,25 +1,83 @@
 .pp-li-container {
-  height: 50%;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: white;
+  background-color: #ff385c;
 }
-.pp-li-container > div {
-  border: 1px solid black;
-  width: 80%;
-  height: 3rem;
-  border-radius: 500px;
-  padding-left: 2rem;
-  display: flex;
-  justify-content: space-between;
-  background: #ff385c;
-  /* color: white; */
-  align-self: center;
+.title > h1 {
+  text-align: center;
+}
+.pp-li-top {
+  position: relative;
+}
+.pp-li-top > span {
+  color: white;
+  font-size: 70px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.pp-li-top,
+.pp-li-bottom {
+  height: 33%;
 }
 
-.pp-li-container > div > input {
-  border-top-right-radius: 500px;
-  border-bottom-right-radius: 500px;
+.pp-li-credentials > div {
+  margin: auto;
+  width: 70%;
+}
+.pp-li-credentials > div > input {
+  padding: 10px;
+  width: 100%;
+  background: #ff385c;
+  border: 0;
+  outline: 0;
+  border-bottom: solid 1px white;
+  margin: 20px 0;
+  color: white;
+}
+
+.pp-li-container > div > div > input:focus {
+  outline: none;
+  border: 1px solid white;
+  box-shadow: 0 0 5px white;
+}
+
+.pp-li-container > div > div > input::placeholder {
+  color: white;
+  opacity: 1;
+}
+
+.pp-li-bottom {
+  width: 70%;
+  height: 10%;
+  border: solid 2px white;
+  margin: auto;
+  border-radius: 10px;
+}
+.pp-li-bottom > button {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.pp-li-bottom > button:hover {
+  background: white;
+  opacity: 0.3;
+  color: #ff385c;
+}
+
+.pp-li-container > ul {
+  list-style-type: none;
+}
+
+.pp-li-container > ul > li {
+  color: white;
+  text-align: center;
 }

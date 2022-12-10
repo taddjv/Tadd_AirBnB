@@ -11,7 +11,7 @@ const MyVenues = () => {
   const spots = useSelector((state) => state.spots);
   const [deleted, setDeleted] = useState(false);
   const [changes, setChanges] = useState(false);
-  const deleteMessage = deleted ? <>deleted</> : null;
+  // const deleteMessage = deleted ? <>deleted</> : null;
 
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -31,8 +31,8 @@ const MyVenues = () => {
     }, 200);
   }, [deleted]);
 
-  if (!spots.spots) {
-    return null;
+  if (!spots.spots.length) {
+    return <>no venues !</>;
   } else {
     return (
       <div className="spots-container">
@@ -51,7 +51,7 @@ const MyVenues = () => {
                 >
                   <button>Delete</button>
                 </div>
-                {deleteMessage}
+                {/* {deleteMessage} */}
                 <div className="addIm">
                   <button>
                     <NavLink

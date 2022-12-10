@@ -19,6 +19,12 @@ const Dropdown = () => {
     <SignUpPop props={[showSignup, setShowSignup]} />
   ) : null;
 
+  const demo = () => {
+    dispatch(
+      sessionActions.login({ credential: "demouser", password: "demouser" })
+    );
+  };
+
   useEffect(() => {}, [showLogin]);
 
   const logout = (e) => {
@@ -34,17 +40,17 @@ const Dropdown = () => {
           <div onClick={logout} className="logOutButton">
             <button className="lo-bttn">Log out</button>
           </div>
-          <div onClick className="hostYourHomeButton">
+          <div onClick={null} className="hostYourHomeButton">
             <NavLink to="/host/home">
               <button className="hyh-bttn">Host your home</button>
             </NavLink>
           </div>
-          <div onClick className="manageMyVenuesButton">
+          <div onClick={null} className="manageMyVenuesButton">
             <NavLink to="/my/venues">
               <button className="mmv-bttn">Manage my venues</button>
             </NavLink>
           </div>
-          <div onClick className="manageBookingsButton">
+          <div onClick={null} className="manageBookingsButton">
             <NavLink to="/my/bookings">
               <button className="mb-bttn">Manage bookings</button>
             </NavLink>
@@ -66,15 +72,7 @@ const Dropdown = () => {
               }}
               className="logInButton"
             >
-              <button
-                // onClick={() => {
-                //   console.log("hello");
-                //   setShowDLogin(!showLogin);
-                // }}
-                className="li-bttn"
-              >
-                Log in
-              </button>
+              <button className="li-bttn">Log in</button>
             </div>
             <div
               onClick={() => {
@@ -83,6 +81,14 @@ const Dropdown = () => {
               className="signUpButton"
             >
               <button className="su-bttn">Sign up</button>
+            </div>
+            <div
+              onClick={() => {
+                demo();
+              }}
+              className="signUpButton"
+            >
+              <button className="su-bttn">Demo User</button>
             </div>
           </div>
         </div>

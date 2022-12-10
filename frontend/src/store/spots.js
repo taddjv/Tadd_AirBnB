@@ -65,7 +65,7 @@ export const getTheSpots = () => async (dispatch) => {
 export const getTheCurrentSpots = () => async (dispatch) => {
   const response = await csrfFetch("/api/spots/current");
   const data = await response.json();
-  console.log(data);
+
   dispatch(getCurrentSpots(data));
   return response;
 };
@@ -80,7 +80,7 @@ export const getTheSpot = (id) => async (dispatch) => {
 export const getTheSpotsUser = () => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/current`);
   const data = await response.json();
-  console.log(data);
+
   dispatch(getSpotsUser(data));
   return response;
 };

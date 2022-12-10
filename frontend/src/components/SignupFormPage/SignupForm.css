@@ -1,26 +1,73 @@
 .pp-lo-container {
-  height: 90%;
+  height: 80%;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: white;
+  background-color: #ff385c;
 }
 
+.su-title {
+  text-align: center;
+  font-size: 40px;
+  margin-top: 20px;
+  color: white;
+}
 .pp-lo-container > div {
-  border: 1px solid black;
-  width: 80%;
-  height: 3rem;
-  border-radius: 500px;
-  padding-left: 2rem;
-  display: flex;
-  justify-content: space-between;
-  background: #ff385c;
-  /* color: white; */
-  align-self: center;
+  height: 30px;
 }
 
 .pp-lo-container > div > input {
-  border-top-right-radius: 500px;
-  border-bottom-right-radius: 500px;
+  padding: 10px;
+  width: 100%;
+  background: #ff385c;
+  border: 0;
+  outline: 0;
+  border-bottom: solid 1px white;
+  margin: 0 80px;
+  color: white;
+  width: 70%;
+}
+
+.pp-lo-container > div > input:focus {
+  outline: none;
+  border: 1px solid white;
+  box-shadow: 0 0 5px white;
+}
+
+.pp-lo-bottom {
+  width: 70%;
+  height: 40px;
+  border: solid 2px white;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+.pp-lo-bottom > button {
+  height: 80%;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  transition: 0.3s;
+}
+.pp-lo-bottom > button:hover {
+  background: white;
+  opacity: 0.3;
+  color: #ff385c;
+}
+
+.pp-lo-container > ul {
+  list-style-type: none;
+  margin-top: 10px;
+}
+
+.pp-lo-container > ul > li {
+  color: white;
+  text-align: center;
+}
+
+.pp-lo-container > div > input::placeholder {
+  color: white;
+  opacity: 1;
 }

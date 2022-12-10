@@ -27,31 +27,37 @@ function LoginFormPage() {
 
   return (
     <form className="pp-li-container" onSubmit={handleSubmit}>
+      <div className="pp-li-top">
+        <span>Log In</span>
+      </div>
       <ul>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
       </ul>
-      <div className="name">
-        <label>Username or Email</label>
-        <input
-          type="text"
-          value={credential}
-          onChange={(e) => setCredential(e.target.value)}
-          required
-        />
+      <div className="pp-li-credentials">
+        <div className="name">
+          <input
+            type="text"
+            placeholder="Username or Email"
+            value={credential}
+            onChange={(e) => setCredential(e.target.value)}
+            required
+          />
+        </div>
+        <div className="password">
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
       </div>
-      <div className="password">
-        <label>Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </div>
-      <div className="book-button">
-        <button type="submit">Log In</button>
+
+      <div className="pp-li-bottom">
+        <button type="submit">Submit</button>
       </div>
     </form>
   );
