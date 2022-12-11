@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink, Redirect } from "react-router-dom";
 import * as spotsActions from "../../store/spots";
 import * as bookingsActions from "../../store/bookings";
 import * as sessionsActions from "../../store/session";
@@ -16,6 +16,7 @@ const EditBooking = () => {
   const [endDate, setEndDate] = useState("");
   const [errors, setErrors] = useState([]);
   const [booked, setBooked] = useState("");
+  const [redir, setRedir] = useState(false);
 
   const editedSpotMessage =
     booked === "yes" ? <>Successfully edited booking </> : null;
@@ -31,16 +32,19 @@ const EditBooking = () => {
       endDate: new Date(endDate),
     };
     setBooked("yes");
-    dispatch(bookingsActions.editTheBooking(editedBooking, bookingId)).catch(
-      async (res) => {
+    dispatch(bookingsActions.editTheBooking(editedBooking, bookingId))
+      .then(() => {
+        setStartDate("");
+        setEndDate("");
+        setErrors([]);
+        setRedir(true);
+      })
+      .catch(async (res) => {
         const data = await res.json();
         setBooked("no");
+        if (data && data.message) setErrors([data.message]);
         if (data && data.errors) setErrors(data.errors);
-      }
-    );
-    setStartDate("");
-    setEndDate("");
-    setErrors([]);
+      });
   };
 
   const renderedSpot = spot ? (
@@ -74,7 +78,7 @@ const EditBooking = () => {
   return (
     <>
       <>
-        {renderedSpot}
+        {redir && <Redirect to="/my/bookings" />};{renderedSpot}
         <form className="formContainer" onSubmit={onSubmit}>
           <div className="title">
             <h1>Edit your booking !</h1>
@@ -84,7 +88,6 @@ const EditBooking = () => {
               <li>{ele}</li>
             ))}
           </ul>
-          {editedSpotMessage}
           <div className="start-date">
             <label htmlFor="start">Start date:</label>
             <input

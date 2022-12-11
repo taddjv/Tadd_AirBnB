@@ -64,7 +64,7 @@ export const createTheBooking = (booking, spotId) => async (dispatch) => {
   });
   if (response.ok) {
     const data = await response.json();
-    dispatch(createBooking(data));
+    // dispatch(createBooking(data));
 
     return "dispatchh";
   }
@@ -83,7 +83,6 @@ export const editTheBooking = (booking, bookingId) => async (dispatch) => {
   });
   if (response.ok) {
     const data = await response.json();
-    dispatch(editBooking(data));
   }
 };
 

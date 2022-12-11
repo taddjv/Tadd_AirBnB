@@ -4,12 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as spotsActions from "../../store/spots";
 
-import * as reviewsActions from "../../store/reviews";
 import "./SpotsDetail.css";
 import StarLogo from "./StarLogo";
 import BookSpot from "./BookSpot";
 
-// import FontAwesomeIcon from
+
 
 function SpotsDetail() {
   const { spotId } = useParams();

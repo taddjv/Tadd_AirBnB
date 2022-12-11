@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink, Redirect } from "react-router-dom";
 import * as spotsActions from "../../store/spots";
 import * as imagesActions from "../../store/images";
 
@@ -10,6 +10,7 @@ const AddImage = () => {
   const spot = useSelector((state) => state.spots.spot);
 
   const [image, setImage] = useState("");
+  const [redir, setRedir] = useState(false);
 
   useEffect(() => {
     dispatch(spotsActions.getTheSpot(spotId));
@@ -21,12 +22,14 @@ const AddImage = () => {
       url: image,
     };
 
-    dispatch(imagesActions.createTheImageSpot(imagee, spotId)).catch(
-      async (res) => {
+    dispatch(imagesActions.createTheImageSpot(imagee, spotId))
+      .then(() => {
+        setImage("");
+        setRedir(true);
+      })
+      .catch(async (res) => {
         const data = await res.json();
-      }
-    );
-    setImage("");
+      });
   };
 
   const renderedSpot = spot ? (
@@ -59,7 +62,7 @@ const AddImage = () => {
 
   return (
     <>
-      {renderedSpot}
+      {redir && <Redirect to={`/spots/${spot.id}`} />};{renderedSpot}
       <form className="formContainer" onSubmit={onSubmit}>
         <div className="title">
           <h1>Add Images to your home !</h1>

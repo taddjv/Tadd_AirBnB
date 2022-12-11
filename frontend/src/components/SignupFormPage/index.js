@@ -34,7 +34,9 @@ function SignupFormPage() {
         const data = await res.json();
 
         if (data && data.message) sessionn = <>invalid credentials</>;
-        if (data && data.errors) setErrors(data.errors);
+        for (let error in data.errors) {
+          setErrors([data.errors[error]]);
+        }
       });
     }
     return setErrors([

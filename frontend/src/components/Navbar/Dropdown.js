@@ -21,7 +21,10 @@ const Dropdown = () => {
 
   const demo = () => {
     dispatch(
-      sessionActions.login({ credential: "demouser", password: "demouser" })
+      sessionActions.login({
+        credential: "Joker.is.bad",
+        password: "killbatman",
+      })
     );
   };
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import bookingsReducer, * as bookingsActions from "../../store/bookings";
 import StarLogo from "./StarLogo";
 
@@ -13,6 +13,7 @@ const BookSpot = ({ spot, spotId }) => {
   const [endDate, setEndDate] = useState("");
   const [errors, setErrors] = useState([]);
   const [booked, setBooked] = useState("");
+  const [redir, setRedir] = useState(false);
 
   const createdSpotMessage =
     booked === "yes" ? <>Successfully booked </> : null;
@@ -25,24 +26,26 @@ const BookSpot = ({ spot, spotId }) => {
     };
     setBooked("yes");
 
-    dispatch(bookingsActions.createTheBooking(bookingInfo, spotId)).catch(
-      async (res) => {
+    dispatch(bookingsActions.createTheBooking(bookingInfo, spotId))
+      .then(() => {
+        setStartDate("");
+        setEndDate("");
+        setErrors([]);
+        setRedir(true);
+      })
+      .catch(async (res) => {
         const data = await res.json();
         setBooked("no");
         if (data && data.errors) setErrors(data.errors);
         if (data && !data.errors) {
           if (data && data.message) setErrors([data.message]);
         }
-      }
-    );
-
-    setStartDate("");
-    setEndDate("");
-    setErrors([]);
+      });
   };
 
   return (
     <>
+      {redir && <Redirect to="/my/bookings" />};
       <div className="sdr-price">${spot.price} CAD night</div>
       <div className="sdr-book">
         <form className="form-container" onSubmit={onSubmit}>
