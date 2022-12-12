@@ -60,6 +60,7 @@ export const getTheSpots = () => async (dispatch) => {
   const response = await csrfFetch("/api/spots");
   const data = await response.json();
   dispatch(getSpots(data));
+  return data;
   return response;
 };
 export const getTheCurrentSpots = () => async (dispatch) => {

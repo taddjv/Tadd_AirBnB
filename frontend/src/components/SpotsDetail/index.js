@@ -8,18 +8,17 @@ import "./SpotsDetail.css";
 import StarLogo from "./StarLogo";
 import BookSpot from "./BookSpot";
 
-
-
 function SpotsDetail() {
   const { spotId } = useParams();
   const dispatch = useDispatch();
   const spot = useSelector((state) => state.spots.spot);
-
   const spots = useSelector((state) => state.spots);
 
-  useEffect(() => {
-    dispatch(spotsActions.getTheSpots());
+  const [otherWay, setOtherWay] = useState(false);
+
+  useEffect(async () => {
     dispatch(spotsActions.getTheSpot(spotId));
+    dispatch(spotsActions.getTheSpots());
   }, []);
 
   if (!spot) {
@@ -62,11 +61,15 @@ function SpotsDetail() {
           <div className="spot-pictures">
             <div className={`s-p1`}>
               <img
-                src={spots.spots.find((ele) => ele.id == spotId).previewImage}
+                src={
+                  spots
+                    ? spots.spots.find((ele) => ele.id == spotId).previewImage
+                    : null
+                }
               />
             </div>
 
-            {spot.Images.slice(1, 5).map((ele, i) => {
+            {spot.Images.slice(0, 4).map((ele, i) => {
               return (
                 <div className={`s-p${i + 2}`}>
                   <img src={ele.url} />
