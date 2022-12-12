@@ -35,9 +35,8 @@ const HostHome = () => {
       name,
       description,
       price,
-      previewImage:
-        image ||
-        "https://img.freepik.com/premium-vector/sketch-house-architecture-drawing-free-hand-vector-illustration_231873-6096.jpg?w=2000",
+      previewImage: image || "https://i.imgur.com/rc5DC8N.jpg",
+      // "https://img.freepik.com/premium-vector/sketch-house-architecture-drawing-free-hand-vector-illustration_231873-6096.jpg?w=2000",
     };
 
     dispatch(spotActions.createTheSpot(createdSpot))
